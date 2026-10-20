@@ -1,0 +1,26 @@
+{
+  "id": "X1",
+  "name": "High-volume message sender",
+  "problem": "Queue-based sender with rate limits, dedupe, retries and delivery-status reconciliation.",
+  "results": [
+    [
+      "Messages delivered under worker-crash chaos",
+      "messages",
+      ""
+    ],
+    [
+      "Duplicate-send rate",
+      "duplicate_send_rate",
+      ""
+    ],
+    [
+      "p99 enqueue-to-send",
+      "p99_enqueue_to_send_ms",
+      " ms"
+    ]
+  ],
+  "diagram": "IdempotentEnqueue --> RedisStreams --> RateLimiter --> SyntheticReceiptSink --> ReconcileAndACK",
+  "limits": "Real Redis Streams and Lua operations; destinations and message contents are synthetic and no messages are sent externally. A worker physically exits after receipt creation but before sender ACK/status; replacement processing reconciles the existing receipt. Retryable timeouts are injected before delivery; Redis enforces the shared rate schedule. Exactly-once sink effects rely on sink-side idempotency in Redis, not on an arbitrary email/SMS provider. Redis server crashes, durable failover and multiple hosts are not covered; this benchmark disables persistence for an isolated temporary server. evidence/reconciliation.json retains per-message receipts, counts and queue status.",
+  "next": "Add provider adapters with idempotency contracts, durable Redis configuration and multi-worker load tests.",
+  "status": "done"
+}

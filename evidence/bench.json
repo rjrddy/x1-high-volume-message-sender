@@ -1,0 +1,9 @@
+{
+  "messages": 200,
+  "throughput_per_second": 297.6792368268392,
+  "duplicate_send_rate": 0.0,
+  "p99_enqueue_to_send_ms": 631.4029693603516,
+  "worker_crashes": 1,
+  "pending_after_reconciliation": 0,
+  "rate_limit_per_second": 500
+}

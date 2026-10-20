@@ -1,0 +1,17 @@
+/Users/rajreddy/dev/outreach/projects/x1-high-volume-message-sender/.venv/bin/python -m ruff check src tests
+All checks passed!
+/Users/rajreddy/dev/outreach/projects/x1-high-volume-message-sender/.venv/bin/python -m ruff format --check src tests
+2 files already formatted
+/Users/rajreddy/dev/outreach/projects/x1-high-volume-message-sender/.venv/bin/python -m pytest -q
+.                                                                        [100%]
+1 passed in 0.60s
+/Users/rajreddy/dev/outreach/projects/x1-high-volume-message-sender/.venv/bin/python src/main.py > evidence/bench.json
+{
+  "messages": 200,
+  "throughput_per_second": 297.6792368268392,
+  "duplicate_send_rate": 0.0,
+  "p99_enqueue_to_send_ms": 631.4029693603516,
+  "worker_crashes": 1,
+  "pending_after_reconciliation": 0,
+  "rate_limit_per_second": 500
+}
