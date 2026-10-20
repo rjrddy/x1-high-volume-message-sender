@@ -9,6 +9,7 @@ import sys
 import tempfile
 import time
 from contextlib import contextmanager
+from collections.abc import Iterator
 from pathlib import Path
 import redis
 
@@ -31,7 +32,7 @@ def enqueue(client: redis.Redis, job_id: str, payload: str) -> bool:
 
 
 @contextmanager
-def server():
+def server() -> Iterator[tuple[redis.Redis, str]]:
     binary = shutil.which("redis-server") or str(
         Path(".cache/redis-7.2.7/src/redis-server").resolve()
     )
